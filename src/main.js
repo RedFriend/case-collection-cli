@@ -8,22 +8,28 @@ import 'element-ui/lib/theme-chalk/index.css'
 import axios from "axios";
 import qs from 'qs'
 import depot from './axios/api.js'
+import Vuex from 'vuex'
+import store from './vuex/store'
+
 
 import $ from 'jquery'
 
 Vue.config.productionTip = false
-Vue.prototype.$axios = axios;
 Vue.prototype.qs = qs
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL='http://146.12.14.248:9090/'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 depot()
 
+
+Vue.prototype.axios=axios
 Vue.use(ElementUI)
+Vue.use(Vuex)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

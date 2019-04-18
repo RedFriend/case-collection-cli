@@ -19,7 +19,6 @@
             :style="`min-width: ${treeWidth}`"
             :data="data"
             :props="props"
-            :expand-on-click-node="false"
             :filter-node-method="filterNode"
             :default-expand-all="false"
             @node-click="onClickNode">
@@ -63,7 +62,7 @@
       // 树节点配置选项
       props: {
         type: Object,
-        required: false,
+        required: true,
         default: () => ({
           parent: 'parentId',
           value: 'rowGuid',
@@ -129,9 +128,11 @@
     methods: {
       // 单击节点
       onClickNode(node) {
-        this.labelModel = node[this.props.label];
-        this.valueModel = node[this.props.value];
-        this.onCloseTree();
+        if(!node.children){
+          this.labelModel = node[this.props.label];
+          this.valueModel = node[this.props.value];
+          this.onCloseTree();
+        }
       },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);

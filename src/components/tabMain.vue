@@ -32,6 +32,7 @@
       }
     } ,methods: {
       handleClick(tab, event) {
+        this.activeName = '0';
         let index = tab.index;
         sessionStorage.setItem('tabXiIndex',index);
         if(index==0){
@@ -39,9 +40,20 @@
             path:"/indexMain"
           })
         }else if(index==1){
-          this.$router.push({
-            path:"/partyList"
-          })
+          let code = this.$store.state.code;
+          let _this = this;
+          if(code){
+            this.$router.push({
+              path:"/partyList"
+            })
+          }else{
+            _this.$notify.error({
+              title: '查看当事人列表',
+              message: '请先保存案件信息!!'
+            });
+            this.activeName = '0';
+          }
+
         }
       },
     },
@@ -85,6 +97,9 @@
   }
   .content-container{
     height:100%;
+  }
+  .el-select-dropdown__wrap{
+    overflow-x: scroll;
   }
 </style>
 

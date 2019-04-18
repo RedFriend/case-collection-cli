@@ -11,15 +11,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     // 设置基础路径
-    proxyTable:{
-      "/api":{
-        target:"http://localhost:8080/dict",
-        changeOrigin:true,
-        pathRewrite:{
-          '^/api':''
-        }
-      }
-    },
+    // proxyTable:{
+    //   "/api":{
+    //     target:"http://146.12.6.248:8080/dict",
+    //     changeOrigin:true,
+    //     pathRewrite:{
+    //       '^/api':''
+    //     }
+    //   }
+    // },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

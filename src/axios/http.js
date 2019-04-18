@@ -5,7 +5,7 @@ const instance = axios.create({
     'content-type': 'application/x-www-form-urlencoded',
     // 'token': 'one'
   },
-  baseURL: 'http://localhost:8080/dict',
+  baseURL: 'http://146.12.6.248:8080/dict',
   timeout: 10000,
   withCredentials: true
 })

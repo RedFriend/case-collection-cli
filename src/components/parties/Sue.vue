@@ -20,8 +20,10 @@
                   <el-form-item label="羁押日期">
                     <el-form-item>
                       <el-date-picker
-                        v-model="ruleForm.data1"
+                        v-model="ruleForm.jyrq"
                         type="date"
+                        suffix-icon="el-icon-date"
+                        value-format="yyyy-MM-dd"
                         placeholder="选择羁押日期">
                       </el-date-picker>
                     </el-form-item>
@@ -31,8 +33,10 @@
                   <el-form-item label="羁押到期时间">
                     <el-form-item>
                       <el-date-picker
-                        v-model="ruleForm.data1"
+                        v-model="ruleForm.jydqsj"
                         type="date"
+                        suffix-icon="el-icon-date"
+                        value-format="yyyy-MM-dd"
                         placeholder="选择羁押到期时间">
                       </el-date-picker>
                     </el-form-item>
@@ -40,105 +44,97 @@
                 </el-col>
               </el-row>
               <el-row :gutter="80">
-              <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-                <el-form-item label="羁押场所">
-                  <el-input></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-                <el-form-item label="羁押仓号">
-                  <el-input></el-input>
-                </el-form-item>
-              </el-col>
-            </el-row>
-              <el-row :gutter="80">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="附带民诉">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sffdms" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sffdms" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="非法取得财产价值">
-                    <el-input></el-input>
+                    <el-input v-model="ruleForm.ffqdccjz"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row :gutter="80">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="强制实施种类">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sfqzsszl" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sfqzsszl" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+                  <el-form-item label="采取强制措施时间">
                   <el-form-item>
                     <el-date-picker
-                      v-model="ruleForm.data1"
+                      v-model="ruleForm.cqqzcssj"
                       type="date"
-                      placeholder="选择羁押到期时间">
+                      suffix-icon="el-icon-date"
+                      value-format="yyyy-MM-dd"
+                      placeholder="选择采取强制措施时间">
                     </el-date-picker>
+                  </el-form-item>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row :gutter="80">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="保证人">
-                    <el-input></el-input>
+                    <el-input v-model="ruleForm.bzr"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="保证金额">
-                    <el-input></el-input>
+                    <el-input v-model="ruleForm.bzje"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row :gutter="80">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="犯罪金额无法计算">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sffzjewfjs" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sffzjewfjs" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="犯罪金额">
-                    <el-input></el-input>
+                    <el-input v-model="ruleForm.fzje"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row :gutter="80">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="在押">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sfzy" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sfzy" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="累犯">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sflf" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sflf" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row :gutter="80">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="曾犯罪">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sfcfz" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sfcfz" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="曾劳教">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sfclj" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sfclj" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row :gutter="80">
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
                   <el-form-item label="数罪并罚">
-                    <el-radio v-model="radio" label="1">备选项</el-radio>
-                    <el-radio v-model="radio" label="2">备选项</el-radio>
+                    <el-radio v-model="ruleForm.sfszbf" label="1">是</el-radio>
+                    <el-radio v-model="ruleForm.sfszbf" label="2">否</el-radio>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
@@ -166,14 +162,23 @@
     },
     data () {
       return {
-        radio: '1',
         show3: true,
-        checkList:[],
         ruleForm: {
-          data1: '',
-          select:'',
-          resource:0,
-          domains: [],
+          jyrq:'',
+          jydqsj:'',
+          sffdms:'2',
+          ffqdccjz:'',
+          sfqzsszl:'2',
+          cqqzcssj:'',
+          bzr:'',
+          bzje:'',
+          sffzjewfjs:'2',
+          fzje:'',
+          sfzy:'2',
+          sflf:'2',
+          sfclj:'2',
+          sfszbf:'2',
+          sfcfz:'2',
         },rules: {
           data1: [
             { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
@@ -181,10 +186,7 @@
             // { required: true, message: '必填项不能为空', trigger: 'blur'}
           ]
         },
-        options5: [{
-          value: '选项1',
-          label: '黄金糕'
-        }],
+        options5: [],
         value1: '',
         // 默认选中值
         selected: 'A',

@@ -7,7 +7,7 @@
     <div class="body-com">
       <div style="height: 300px;" class="fix-enDa">
         <el-steps direction="vertical" :active="1">
-          <el-step title="收案信息" icon="el-icon-edit"></el-step>
+          <el-step title="1 收案信息" icon="el-icon-edit"></el-step>
           <el-step title="2 "></el-step>
           <el-step title="3 "></el-step>
           <el-step title="4 "></el-step>
@@ -17,12 +17,12 @@
     </div>
     <div class="body-right">
       <div class="right-btn-ground">
-        <el-button type="primary">保存并新增<br>当事人</el-button>
-        <el-button type="primary" @click="saveCase">保存</el-button>
-        <el-button type="primary">立案</el-button>
-        <el-button type="primary">提交审批</el-button>
-        <el-button type="primary">转立案法官</el-button>
-        <el-button type="primary">返回</el-button>
+        <!--<el-button type="primary">保存并新增<br>当事人</el-button>-->
+        <el-button icon="el-icon-success" type="primary" @click="saveCase">保存</el-button>
+        <!--<el-button type="primary">立案</el-button>-->
+        <!--<el-button type="primary">提交审批</el-button>-->
+        <!--<el-button type="primary">转立案法官</el-button>-->
+        <!--<el-button type="primary">返回</el-button>-->
       </div>
     </div>
     </el-scrollbar>
@@ -31,22 +31,37 @@
 
 <script>
   import  cognizanceInformation from './page/cognizanceInformation';
+  import axios from 'axios'
 export default {
   name: 'IndexMain',
   data () {
     return {
-
+      msg:''
     }
   }
   ,components: {
     'v-cognizanceInformation': cognizanceInformation
   },methods:{
     saveCase:function () {
-      debugger
       //提交表单验证
+      let _this = this;
       this.$refs.addForm.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          let data = this.$refs.addForm.$refs['ruleForm'].model;
+          axios.post('/case/addUpdCase', data)
+            .then(function (response) {
+              console.log(response)
+              if(response.status == 200){
+                _this.$notify({
+                  title: '保存案件信息',
+                  message: '成功保存案件信息',
+                  type: 'success'
+                });
+                _this.$store.commit('showAge', response.data.data.code);  //保存案件信息返回的code值
+              }
+            })
+            .catch(function (error) {
+            });
         } else {
           this.$notify.error({
             title: '保存案件信息',

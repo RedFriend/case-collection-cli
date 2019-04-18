@@ -2,12 +2,12 @@
   <div>
     <div class="tag-x">
       <el-tag
-        :key="tag"
+        :key="tag.name"
         v-for="tag in dynamicTags"
         closable
         :disable-transitions="false"
         @close="handleClose(tag)">
-        {{tag}}
+        {{tag.name}}
       </el-tag>
     </div>
     <el-popover
@@ -21,6 +21,8 @@
         placeholder="输入关键字进行过滤"
         v-model="filterText">
       </el-input>
+      <div style="height:300px">
+        <el-scrollbar style="height:100%;">
       <el-tree
         ref="tree"
         highlight-current
@@ -32,6 +34,8 @@
         :default-expand-all="false"
         @node-click="onClickNode">
       </el-tree>
+        </el-scrollbar>
+      </div>
       <el-input
         slot="reference"
         ref="input"
@@ -79,7 +83,7 @@
     },
     // 设置绑定参数
     model: {
-      prop: 'value',
+      prop: 'label',
       event: 'selected',
     },
     computed: {
@@ -145,19 +149,25 @@
         // this.labelModel = node[this.props.label];
         // this.valueModel = node[this.props.value];
         this.onCloseTree();
-        this.panXif = node.label;
+        this.panXif = node.name;
         this.indexZt = 1;
         for(let i = 0;i<this.dynamicTags.length;i++){
-          if(this.dynamicTags[i]==this.panXif){
+          if(this.dynamicTags[i].name==this.panXif){
             this.dynamicTags.splice(this.dynamicTags.indexOf(this.panXif), 1);
           }
         }
-        this.dynamicTags.push(node.label);
-
+        let obj = {
+          name:node.name,
+          value:node.value
+        }
+        this.dynamicTags.push(obj);
+        this.$emit('func',this.dynamicTags);
       },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
         $('.scrollbar').find('.sel-input1').find('input').css('height',$('.tag-x').height()+'px');
+        // 点击关闭标签动态删除传的父参数
+        this.$emit('func',this.dynamicTags);
       },
       // 偏平数组转化为树状层级结构
       switchTree() {
@@ -192,7 +202,7 @@
             stark = stark.concat(temp[this.props.children]);
           }
           if (temp[this.props.value] === id) {
-            return temp[this.props.label];
+            return temp[this.props.name];
           }
         }
         return '';

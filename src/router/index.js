@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import IndexMain from '@/components/main'
+import diogCenter from '@/components/diogCenter'
 import TabMain from '@/components/tabMain'
 import partyList from '@/components/page/partyList'
 import addParties from '@/components/parties/addParties'
